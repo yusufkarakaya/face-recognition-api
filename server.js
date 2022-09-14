@@ -35,6 +35,7 @@ app.post("/signin", (req, res) => {
     .then((data) => {
       const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
       if (isValid) {
+        0;
         return db
           .select("*")
           .from("users")
@@ -113,6 +114,6 @@ app.put("/image", (req, res) => {
     .catch((err) => res.status(400).json("unable to get entries"));
 });
 
-app.listen(3000, () => {
-  console.log("app is running on port 3000");
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`app is running on port ${process.env.PORT}`);
 });
